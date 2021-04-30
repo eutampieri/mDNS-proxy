@@ -28,8 +28,8 @@ fn main() {
             mdns_socket
                 .send_to(&buf[0..msg_size], (MULTICAST_ADDR, 5353))
                 .unwrap();
-            println!("{:?}", dns_parser::Packet::parse(&buf).unwrap());
             if let Ok(mdns_len) = mdns_socket.recv(&mut buf) {
+                println!("{:?}", dns_parser::Packet::parse(&buf).unwrap());
                 dns_socket.send_to(&buf[0..mdns_len], sender).unwrap();
             }
         }
