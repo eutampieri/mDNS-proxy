@@ -17,9 +17,9 @@ fn main() {
         std::net::Ipv4Addr::from_str(&mdns_from_ip).expect("Please provide a valid IPv4");
     let mdns_socket =
         std::net::UdpSocket::bind((mdns_iface, 0)).expect("Unable to bind to multicast DNS");
-    mdns_socket
-        .join_multicast_v4(&MULTICAST_ADDR, &mdns_iface)
-        .expect("Unable to join mDNS");
+    /*mdns_socket
+    .join_multicast_v4(&MULTICAST_ADDR, &mdns_iface)
+    .expect("Unable to join mDNS");*/
     let dns_socket = std::net::UdpSocket::bind((std::net::Ipv4Addr::new(0, 0, 0, 0), listen_port))
         .expect("Unable to bind to requested port");
     let mut buf: [u8; 512] = [0; 512];
