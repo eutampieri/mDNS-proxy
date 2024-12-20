@@ -20,6 +20,9 @@ fn main() {
     mdns_socket
         .join_multicast_v4(&MULTICAST_ADDR, &mdns_iface)
         .expect("Unable to join mDNS");
+    mdns_socket
+        .set_read_timeout(Some(std::time::Duration::from_millis(500)))
+        .expect("Cannot set read timeout on mDNS socket");
     let dns_socket = std::net::UdpSocket::bind((std::net::Ipv4Addr::new(0, 0, 0, 0), listen_port))
         .expect("Unable to bind to requested port");
     let mut buf: [u8; 512] = [0; 512];
